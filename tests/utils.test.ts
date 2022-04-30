@@ -61,4 +61,14 @@ describe('test flat routes', () => {
       '/user/:id/posts'
     ]);
   });
+  it('test string routes', () => {
+    const routes = ['/user'];
+
+    expect(flatRoutes(routes)).toEqual(['/user']);
+  });
+
+  it('test string array routes', () => {
+    const routes = ['/user/:id', '/post/foo'];
+    expect(flatRoutes(routes)).toEqual(['/user/:id', '/post/foo']);
+  });
 });

@@ -37,6 +37,40 @@ describe('test sample server', () => {
   });
 });
 
+describe('string array routes', () => {
+  const routes = ['/user', '/post/:name', '/user/main'];
+
+  const app = new Koa();
+  app.use(
+    history({
+      routes,
+      root: join(__dirname, './fixtures')
+    })
+  );
+  const server = createServer(app.callback());
+
+  it('history route match', async () => {
+    const response1 = await request(server).get('/user');
+    expect(response1.statusCode).toBe(200);
+
+    const response2 = await request(server).get('/user/main');
+    expect(response2.statusCode).toBe(200);
+
+    const response3 = await request(server).get('/post/xiaochuan');
+    expect(response3.statusCode).toBe(200);
+  });
+  it('history route not match', async () => {
+    const response1 = await request(server).get('/');
+    expect(response1.statusCode).not.toBe(200);
+
+    const response2 = await request(server).get('/user/i');
+    expect(response2.statusCode).not.toBe(200);
+
+    const response3 = await request(server).get('/post');
+    expect(response3.statusCode).not.toBe(200);
+  });
+});
+
 describe('test children routes', () => {
   const routes = [
     {
