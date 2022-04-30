@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "lint": "eslint src/ --ext .ts",
+    "lint": "eslint src/ tests/ --ext .ts",
     "test": "jest"
   },
   "devDependencies": {

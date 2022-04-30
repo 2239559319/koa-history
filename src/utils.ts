@@ -1,19 +1,24 @@
+import { posix } from 'path';
 import type { Router } from './types';
+
+const { join } = posix;
 
 export function noop() {}
 
 function walk(res: Array<any>, routes: Router | Router[], parentPath: string) {
   if (Array.isArray(routes)) {
     routes.forEach((route) => {
-      res.push(route.path);
+      const curPath = join(parentPath, route.path);
+      res.push(curPath);
       if (route.children) {
-        walk(res, route.children, parentPath + route.path);
+        walk(res, route.children, curPath);
       }
     });
   } else {
-    res.push(routes.path);
+    const curPath = join(parentPath, routes.path);
+    res.push(curPath);
     if (routes.children) {
-      walk(res, routes.children, parentPath + routes.path);
+      walk(res, routes.children, curPath);
     }
   }
 }
