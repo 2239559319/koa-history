@@ -1,6 +1,14 @@
 {
   "name": "@wxiaochuan/koa-history",
   "version": "0.0.1",
+  "description": "koa middleware implements html5 history",
+  "keywords": [
+    "koa",
+    "middleware",
+    "history",
+    "router",
+    "route"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "http://registry.npmjs.org"
