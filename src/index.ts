@@ -3,10 +3,10 @@ import type { Context, Next } from 'koa';
 import send from 'koa-send';
 import { pathToRegexp } from 'path-to-regexp';
 import type { Option } from './types';
-import { flatRoutes } from './utils';
+import { flatRoutes, pathIsFile, noop } from './utils';
 
 function history(option: Option) {
-  const { routes, root, opts = {} } = option;
+  const { routes, root, opts = {}, shield = true } = option;
   opts.root = resolve(root);
   if (opts.index !== false) {
     opts.index = opts.index || 'index.html';
@@ -18,7 +18,7 @@ function history(option: Option) {
   return async (ctx: Context, next: Next) => {
     await next();
     const { body, path } = ctx;
-    if (body) {
+    if (body && pathIsFile(path)) {
       return;
     }
 
@@ -29,6 +29,12 @@ function history(option: Option) {
     const matched = routesRegArr.some((reg) => reg.test(path));
     if (matched) {
       await send(ctx, '.', opts);
+    } else if (!pathIsFile(path) && body && shield) {
+      ctx.body = 'Not Found';
+      ctx.type = 'text';
+      ctx.status = 404;
+    } else {
+      noop();
     }
   };
 }

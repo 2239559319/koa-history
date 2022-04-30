@@ -5,6 +5,7 @@ export interface Router {
 
 export interface Option {
   routes?: Router | Router[] | string[];
+  shield?: boolean;
   root: string;
   opts?: any;
 }

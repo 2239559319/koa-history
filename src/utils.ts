@@ -1,9 +1,13 @@
 import { posix } from 'path';
 import type { Router } from './types';
 
-const { join } = posix;
+const { join, extname } = posix;
 
 export function noop() {}
+
+export function pathIsFile(path) {
+  return extname(path) !== '';
+}
 
 function walk(
   res: Array<any>,

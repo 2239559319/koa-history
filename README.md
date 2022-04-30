@@ -39,6 +39,7 @@ export interface Router {
 
 export interface Option {
   routes?: Router | Router[] | string[];
+  shield?: boolean;
   root: string;
   opts?: any;
 }
@@ -115,7 +116,7 @@ app.use(history({
   root: '/dist'
 }));
 
-app.use(static('/dist'));
+app.use(koaStatic('/dist'));
 
 app.listen(9000);
 ```
@@ -131,3 +132,6 @@ app.use(history({
   }
 }));
 ```
+
+## open file routes
+By default, a path that is not defined in the routes option will return 404, regardless of whether the file exists or not, it will be blocked by default. In the above example, a 404 is returned when path=/ is requested despite the `dist/index.html` file existed. To turn off this behavior, set `shield` to `false`.

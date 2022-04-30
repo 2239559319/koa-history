@@ -39,6 +39,7 @@ export interface Router {
 
 export interface Option {
   routes?: Router | Router[] | string[];
+  shield?: boolean;
   root: string;
   opts?: any;
 }
@@ -112,7 +113,7 @@ app.use(history({
   root: '/dist'
 }));
 
-app.use(static('/dist'));
+app.use(koaStatic('/dist'));
 
 app.listen(9000);
 ```
@@ -128,3 +129,7 @@ app.use(history({
   }
 }));
 ```
+
+## 开启文件路由
+
+默认情况下非路由option定义的path会返回404，无论是否真的存在文件，默认会屏蔽。在上面的例子中，尽管存在`dist/index.html`文件但是当请求path=/的时候还是会返回404。想要关闭这种行为可以将`shield`设置为`false`。
