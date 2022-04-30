@@ -6,5 +6,5 @@ export interface Router {
 export interface Option {
   routes?: Router | Router[];
   root: string;
-  opts: any;
+  opts?: any;
 }

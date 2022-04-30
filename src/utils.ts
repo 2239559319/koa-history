@@ -23,10 +23,8 @@ function walk(res: Array<any>, routes: Router | Router[], parentPath: string) {
   }
 }
 
-export function flatRoutes(
-  routes: Router | Router[]
-): Array<Pick<Router, 'path'>> {
-  const res: Array<Pick<Router, 'path'>> = [];
+export function flatRoutes(routes: Router | Router[]): Array<string> {
+  const res: Array<string> = [];
   walk(res, routes, '');
   return res;
 }
