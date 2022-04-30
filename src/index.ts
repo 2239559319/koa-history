@@ -4,7 +4,6 @@ import send from 'koa-send';
 import type { Option } from './types';
 
 function history(option: Option) {
-
   const { routes, root, opts = {} } = option;
   opts.root = resolve(root);
   if (opts.index !== false) {
@@ -22,7 +21,6 @@ function history(option: Option) {
     }
 
     send(ctx, ctx.path, opts);
-
   };
 }
 

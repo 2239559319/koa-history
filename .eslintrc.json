@@ -13,6 +13,7 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "import/no-unresolved": "off",
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "prettier/prettier": "error"
   }
 }
