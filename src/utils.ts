@@ -5,13 +5,23 @@ const { join } = posix;
 
 export function noop() {}
 
-function walk(res: Array<any>, routes: Router | Router[], parentPath: string) {
-  if (Array.isArray(routes)) {
+function walk(
+  res: Array<any>,
+  routes: Router | Router[] | string[],
+  parentPath: string
+) {
+  if (typeof routes === 'string') {
+    res.push(routes);
+  } else if (Array.isArray(routes)) {
     routes.forEach((route) => {
-      const curPath = join(parentPath, route.path);
-      res.push(curPath);
-      if (route.children) {
-        walk(res, route.children, curPath);
+      if (typeof route === 'string') {
+        res.push(route);
+      } else {
+        const curPath = join(parentPath, route.path);
+        res.push(curPath);
+        if (route.children) {
+          walk(res, route.children, curPath);
+        }
       }
     });
   } else {
@@ -23,7 +33,9 @@ function walk(res: Array<any>, routes: Router | Router[], parentPath: string) {
   }
 }
 
-export function flatRoutes(routes: Router | Router[]): Array<string> {
+export function flatRoutes(
+  routes: Router | Router[] | string[]
+): Array<string> {
   const res: Array<string> = [];
   walk(res, routes, '');
   return res;

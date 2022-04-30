@@ -4,7 +4,7 @@ export interface Router {
 }
 
 export interface Option {
-  routes?: Router | Router[];
+  routes?: Router | Router[] | string[];
   root: string;
   opts?: any;
 }
