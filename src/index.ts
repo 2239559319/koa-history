@@ -24,6 +24,7 @@ function history(option: Option) {
 
     if (!routes) {
       await send(ctx, '.', opts);
+      return;
     }
     const matched = routesRegArr.some((reg) => reg.test(path));
     if (matched) {
