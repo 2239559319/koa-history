@@ -1,6 +1,6 @@
 {
   "name": "@wxiaochuan/koa-history",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "koa middleware implements html5 history",
   "keywords": [
     "koa",
@@ -17,6 +17,11 @@
     "name": "2239559319",
     "email": "w2239559319@outlook.com",
     "url": "https://github.com/2239559319"
+  },
+  "homepage": "https://github.com/2239559319/koa-history",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2239559319/koa-history"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
